@@ -55,17 +55,17 @@ const upsellStoragePrefix = "upsell_seen_";
 const purchaseToastMessages = [
   "Gabriel acabou de assinar o acesso premium",
   "Carlos Eduardo Oliveira acabou de assinar",
-  "Rafael acabou de liberar o conteudo premium",
+  "Rafael acabou de liberar o conteúdo premium",
   "Lucas acabou de garantir o acesso premium",
   "Bruno acabou de assinar agora",
   "Thiago acabou de garantir o perfil premium",
-  "Mateus acabou de liberar o conteudo premium",
+  "Mateus acabou de liberar o conteúdo premium",
   "Eduardo acabou de assinar o perfil",
-  "Joao Pedro acabou de assinar",
+  "João Pedro acabou de assinar",
   "Gustavo acabou de liberar o perfil",
   "Henrique acabou de garantir o acesso",
   "Felipe acabou de assinar agora",
-  "Andre acabou de liberar o conteudo premium",
+  "André acabou de liberar o conteúdo premium",
 ];
 let purchaseToastIndex = 0;
 
@@ -107,16 +107,16 @@ function updatePromoValidity() {
 
 function getPixelProductParams(plan = selectedPlan) {
   return {
-    content_name: `Acesso Premium Nicolle - ${plan.label}`,
+    content_name: `Acesso Premium Sarah Estanislau - ${plan.label}`,
     content_type: "product",
     contents: [
       {
-        id: `site-18-nicolle-premium-${plan.id}`,
+        id: `site-18-sarah-estanislau-premium-${plan.id}`,
         quantity: 1,
         item_price: plan.price,
       },
     ],
-    content_ids: [`site-18-nicolle-premium-${plan.id}`],
+    content_ids: [`site-18-sarah-estanislau-premium-${plan.id}`],
     currency: "BRL",
     value: plan.price,
   };
@@ -553,7 +553,7 @@ async function checkOrderStatus() {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.error || "Nao foi possivel consultar o pedido.");
+    throw new Error(data.error || "Não foi possível consultar o pedido.");
   }
 
   if (data.isPaid) {
@@ -585,7 +585,7 @@ async function checkOrderStatus() {
   }
 
   deliveryStatus.textContent =
-    "Pagamento ainda pendente. Depois de pagar, a confirmacao pode levar alguns instantes.";
+    "Pagamento ainda pendente. Depois de pagar, a confirmação pode levar alguns instantes.";
 }
 
 function startPolling() {
@@ -716,7 +716,7 @@ checkoutForm?.addEventListener("submit", async (event) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "Nao foi possivel gerar o Pix.");
+      throw new Error(data.error || "Não foi possível gerar o Pix.");
     }
 
     currentOrderId = data.order_id;
@@ -755,9 +755,9 @@ checkoutForm?.addEventListener("submit", async (event) => {
       trackMetaEvent("Lead", getPixelProductParams(), { customer: latestCustomerData });
       leadTracked = true;
     }
-    setFeedback("Pix gerado. Pague usando o QR Code ou o copia e cola.", "success");
+    setFeedback("Pix gerado. Pague usando o QR Code ou o código Pix copia e cola.", "success");
     deliveryStatus.textContent = currentTransactionHash
-      ? "Aguardando confirmacao do pagamento."
+      ? "Aguardando confirmação do pagamento."
       : "Pix gerado. Depois de pagar, clique em verificar pagamento.";
     startPolling();
   } catch (error) {
@@ -779,9 +779,9 @@ copyPixButton?.addEventListener("click", async () => {
     document.execCommand("copy");
   }
 
-  copyPixButton.textContent = "Codigo copiado";
+  copyPixButton.textContent = "Código copiado";
   window.setTimeout(() => {
-    copyPixButton.textContent = "Copiar codigo Pix";
+    copyPixButton.textContent = "Copiar código Pix";
   }, 1600);
 });
 

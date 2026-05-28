@@ -78,7 +78,7 @@ function createExternalId(customer = {}) {
 
 function buildEvent(req, payload = {}) {
   if (!SUPPORTED_EVENTS.has(payload.event_name)) {
-    const error = new Error("Evento Meta nao suportado.");
+    const error = new Error("Evento Meta não suportado.");
     error.statusCode = 400;
     throw error;
   }
@@ -164,8 +164,8 @@ async function sendPurchaseFromOrder(req, order) {
 
   const value = Number(order.item?.price || process.env.PRODUCT_PRICE || 0);
   const eventId = `Purchase.${order.id}`;
-  const productName = order.item?.title || process.env.PRODUCT_NAME || "Acesso Premium Nicolle";
-  const productId = process.env.PRODUCT_ID || "site-18-nicolle-premium";
+  const productName = order.item?.title || process.env.PRODUCT_NAME || "Acesso Premium Sarah Estanislau";
+  const productId = process.env.PRODUCT_ID || "site-18-sarah-estanislau-premium";
 
   return sendEvent(req, {
     event_name: "Purchase",

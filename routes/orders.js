@@ -10,7 +10,7 @@ router.get("/:orderId/status", async (req, res) => {
   let order = orderStore.getOrder(req.params.orderId);
 
   if (!order) {
-    return res.status(404).json({ error: "Pedido nao encontrado." });
+    return res.status(404).json({ error: "Pedido não encontrado." });
   }
 
   const payment = paymentStatusStore.getPayment(order.transactionHash);
@@ -42,7 +42,7 @@ router.get("/:orderId/status", async (req, res) => {
 });
 
 router.get("/:orderId/download", (req, res) => {
-  return res.status(404).send("Download nao disponivel para este produto.");
+  return res.status(404).send("Download não disponível para este produto.");
 });
 
 module.exports = router;

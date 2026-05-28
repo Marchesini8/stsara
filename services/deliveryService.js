@@ -2,7 +2,7 @@ const orderStore = require("./orderStore");
 
 async function deliverOrder(order) {
   if (!order?.isPaid) {
-    return { delivered: false, reason: "Pedido ainda nao pago." };
+    return { delivered: false, reason: "Pedido ainda não pago." };
   }
 
   const attempt = {

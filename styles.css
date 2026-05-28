@@ -365,24 +365,42 @@ video {
   color: #fff;
   font-size: 1.1rem;
   box-shadow: 0 14px 32px rgba(255, 100, 43, 0.22);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition: transform 0.26s ease, box-shadow 0.26s ease;
+  will-change: transform;
 }
 
-.hero-plan::before,
+.hero-plan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 32%,
+    rgba(255, 255, 255, 0.38) 48%,
+    transparent 64%,
+    transparent 100%
+  );
+  transform: translateX(-115%);
+  animation: planSheen 2.8s cubic-bezier(0.42, 0, 0.22, 1) infinite;
+  pointer-events: none;
+  will-change: transform;
+}
+
 .hero-plan::after {
   content: "";
   position: absolute;
-  inset: -3px;
-  z-index: -1;
+  inset: -5px;
+  z-index: -2;
   border-radius: inherit;
-  background: linear-gradient(90deg, #f58370, #f5a55b, #ff6b2a, #f58370);
-  background-size: 220% 100%;
-  animation: planBorderGlow 2s linear infinite;
-}
-
-.hero-plan::after {
+  background: rgba(255, 107, 42, 0.34);
   filter: blur(12px);
-  opacity: 0.78;
+  opacity: 0.72;
+  animation: planSoftPulse 2.6s ease-in-out infinite;
+  pointer-events: none;
+  will-change: opacity, transform;
 }
 
 .hero-plan:hover,
@@ -902,6 +920,26 @@ video {
   text-transform: uppercase;
 }
 
+.email-delivery-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(18, 199, 127, 0.2);
+  border-radius: 8px;
+  background: #ecfff7;
+  color: #047b4f;
+  font-size: 0.78rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.email-delivery-note i {
+  flex: 0 0 auto;
+  color: var(--green);
+}
+
 .checkout-form,
 .pix-result {
   display: grid;
@@ -1225,13 +1263,28 @@ legend {
   }
 }
 
-@keyframes planBorderGlow {
-  from {
-    background-position: 0% 50%;
+@keyframes planSheen {
+  0%,
+  18% {
+    transform: translateX(-115%);
   }
 
-  to {
-    background-position: 220% 50%;
+  64%,
+  100% {
+    transform: translateX(115%);
+  }
+}
+
+@keyframes planSoftPulse {
+  0%,
+  100% {
+    opacity: 0.48;
+    transform: scale(0.985);
+  }
+
+  50% {
+    opacity: 0.72;
+    transform: scale(1.015);
   }
 }
 

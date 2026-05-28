@@ -80,7 +80,7 @@ router.post("/checkout", async (req, res) => {
     };
 
     const selectedPlan = getSelectedPlan(planId);
-    const productName = `${process.env.PRODUCT_NAME || "Acesso Premium Nicolle"} - ${selectedPlan.label}`;
+    const productName = `${process.env.PRODUCT_NAME || "Acesso Premium Sarah Estanislau"} - ${selectedPlan.label}`;
     const item = {
       title: productName,
       price: selectedPlan.price,
