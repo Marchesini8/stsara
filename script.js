@@ -45,7 +45,7 @@ let latestOrderItem = null;
 let selectedPlan = {
   id: "15d",
   label: "15 Dias",
-  price: 17.99,
+  price: 19.99,
 };
 
 const activeOrderStorageKey = "active_order";

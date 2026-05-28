@@ -536,9 +536,9 @@ video {
 
 .purchase-toast {
   position: fixed;
-  left: max(16px, calc(50% - 530px));
-  bottom: 26px;
-  z-index: 40;
+  top: 92px;
+  right: max(16px, calc(50% - 530px));
+  z-index: 120;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 3px 8px;
@@ -551,7 +551,7 @@ video {
   box-shadow: 0 16px 38px rgba(255, 105, 55, 0.2);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(20px);
+  transform: translateY(-12px);
 }
 
 .purchase-toast::before {
@@ -609,10 +609,9 @@ video {
 
 .content-preview {
   display: grid;
-  gap: 12px;
   max-width: 310px;
   margin: 12px auto 0;
-  padding: 0 16px 26px;
+  padding: 0 16px 14px;
 }
 
 .feed-media {
@@ -1182,9 +1181,9 @@ legend {
   }
 
   .purchase-toast {
-    left: 44px;
-    bottom: 58px;
-    width: min(250px, calc(100vw - 76px));
+    top: 84px;
+    right: 14px;
+    width: min(250px, calc(100vw - 28px));
   }
 
   .profile-tabs {
@@ -1358,7 +1357,7 @@ legend {
 @keyframes toastInOut {
   0% {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(-12px);
   }
 
   12%,
@@ -1369,7 +1368,7 @@ legend {
 
   100% {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(-8px);
   }
 }
 
