@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sarah Estanislau - Privacy</title>
-    <meta name="description" content="Perfil exclusivo da Sarah Estanislau com assinatura via Pix." />
-    <link rel="stylesheet" href="/nicolle/css/all.min.css" />
+    <title>Virginia Fonseca - Privacy</title>
+    <meta name="description" content="Perfil exclusivo da Virginia Fonseca com assinatura via Pix." />
+    <link rel="stylesheet" href="/virginia/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,7 +37,10 @@
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
       })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-      fbq("init", "1499267518361019");
+      window.__metaPixelIds = ["1002260965659482"].filter(
+        (pixelId, index, pixelIds) => pixelId && pixelIds.indexOf(pixelId) === index
+      );
+      window.__metaPixelIds.forEach((pixelId) => fbq("init", pixelId));
       window.__metaPageViewEventId = `PageView.${Date.now()}.${Math.random().toString(16).slice(2)}`;
       fbq("track", "PageView", {}, { eventID: window.__metaPageViewEventId });
     </script>
@@ -46,7 +49,7 @@
         height="1"
         width="1"
         style="display: none"
-        src="https://www.facebook.com/tr?id=1499267518361019&ev=PageView&noscript=1"
+        src="https://www.facebook.com/tr?id=1002260965659482&ev=PageView&noscript=1"
         alt=""
       />
     </noscript>
@@ -54,7 +57,7 @@
   <body class="age-locked">
     <div class="age-gate" id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-title">
       <div class="age-card">
-        <img src="/nicolle/images/privacy-logo-reference.png" alt="Privacy" />
+        <img src="/virginia/images/privacy-logo-reference.png" alt="Privacy" />
         <h1 id="age-title">Confirmação de Idade</h1>
         <p>Por favor, confirme sua idade para continuar.</p>
         <button class="age-confirm" id="age-confirm" type="button">Tenho mais de 18 anos</button>
@@ -70,25 +73,31 @@
       <div class="promo-bar" id="promo-validity">ESSA PROMOÇÃO É VÁLIDA ATÉ 26/05/2026</div>
 
       <header class="top-logo">
-        <img src="/nicolle/images/privacy-logo-reference.png" alt="Privacy" />
+        <img src="/assets/privacy-logo-cropped.png" alt="Privacy" />
       </header>
 
       <main class="profile-page">
         <section class="profile-card">
           <div class="cover-section">
-            <img class="cover-photo" src="/nicolle/images/sarah-banner.jpg" alt="Capa do perfil" />
+            <img class="cover-photo" src="/assets/profile/cover-photo.png" alt="Capa do perfil" />
             <div class="media-stats cover-stats" aria-label="Resumo de mídias">
               <span><i class="fas fa-image"></i>354</span>
               <span><i class="fas fa-video"></i>148</span>
               <span><i class="far fa-heart"></i>20.2K</span>
             </div>
+            <div class="purchase-toast" id="purchase-toast" aria-live="polite" aria-hidden="true">
+              <button class="toast-close" type="button" aria-label="Fechar">&times;</button>
+              <strong id="purchase-toast-name">Joao Pedro assinou</strong>
+              <em id="purchase-toast-plan">3 Meses</em>
+              <span id="purchase-toast-time">ha 3 minutos</span>
+            </div>
           </div>
 
           <div class="profile-head">
-            <img class="avatar" src="/nicolle/images/sarah-profile.jpeg" alt="Sarah Estanislau" />
+            <img class="avatar" src="/assets/profile/profile-photo.jpg" alt="Virginia Fonseca" />
             <div class="identity">
               <h1>
-                Sarah Estanislau
+                Virginia Fonseca
                 <span class="verified" aria-label="Verificado">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -97,16 +106,16 @@
                   </svg>
                 </span>
               </h1>
-              <p>@sarah.estanislau</p>
+              <p>@VirginiaFonseca</p>
             </div>
           </div>
 
-          <div class="bio-block">
+          <div class="bio-block is-collapsed">
             <p class="bio-text" id="bioText">
               🚨 O que todos sempre quiseram ver agora foi liberado e sem censura... Após término de relacionamento
-              a influencer deixou vazar vários vídeos íntimos dela, e isso está virando a internet de
-              ponta-cabeça... Tem mais de 50 vídeos dela fazendo sexo e se masturbando, todos explícitos e sem censura.
-              Sem contar as 100 fotos dela totalmente nua e com brinquedinhos. E não para por aí, está vindo cada vez mais
+              a influencer Virginia Fonseca deixou vazar vários vídeos íntimos dela, e isso ta virando a internet de
+              ponta cabeça... Tem mais de 50 videos dela fazendo sexo e se masturbando, todos explícitos e sem censura.
+              Sem contar as 100 fotos dela totalmente nua e com brinquedinhos . E não para por ai ta vindo cada vez mais
               vazados dela! 🔥 😈
             </p>
             <button class="bio-toggle" id="bioToggle" type="button">Mostrar mais</button>
@@ -128,7 +137,7 @@
             >
               <strong>15 Dias</strong>
               <span>
-                <del class="price-old">R$ 65,90</del>
+                <del class="price-old">R$ 49,90</del>
                 <strong class="price-new">R$ 19,99</strong>
                 <i class="fas fa-arrow-right"></i>
               </span>
@@ -181,12 +190,6 @@
             </div>
           </section>
 
-          <div class="purchase-toast" id="purchase-toast" aria-live="polite" aria-hidden="true">
-            <button class="toast-close" type="button" aria-label="Fechar">×</button>
-            <strong id="purchase-toast-name">João Pedro assinou</strong>
-            <span>há 3 minutos</span>
-          </div>
-
           <nav class="profile-tabs" aria-label="Conteúdos">
             <span>502 Posts</span>
             <b>•</b>
@@ -198,12 +201,65 @@
           <section class="content-preview" aria-label="Prévia do conteúdo">
             <article class="feed-media">
               <div class="feed-author">
-                <img src="/nicolle/images/sarah-profile.jpeg" alt="" />
-                <span>Sarah Estanislau</span>
+                <img src="/assets/profile/profile-photo.jpg" alt="" />
+                <div>
+                  <strong>Virginia Fonseca</strong>
+                  <span>@niic.ca</span>
+                </div>
               </div>
               <div class="locked-frame">
-                <video src="/nicolle/media/videomelmaia03.mp4" autoplay muted loop playsinline preload="auto"></video>
+                <video src="/virginia/media/videomelmaia03.mp4" autoplay muted loop playsinline preload="auto"></video>
                 <span class="lock-badge"><i class="fas fa-lock"></i></span>
+                <div class="media-engagement" aria-label="67.4K likes e 1.9K comentários">
+                  <span><i class="far fa-heart"></i> 67.4K</span>
+                  <span><i class="far fa-comment"></i> 1.9K Comentarios</span>
+                </div>
+              </div>
+              <div class="feed-actions" aria-hidden="true">
+                <i class="far fa-heart"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+            </article>
+
+            <article class="feed-media">
+              <div class="feed-author">
+                <img src="/assets/profile/profile-photo.jpg" alt="" />
+                <div>
+                  <strong>Virginia Fonseca</strong>
+                  <span>@niic.ca</span>
+                </div>
+              </div>
+              <div class="locked-frame">
+                <img src="/virginia/images/imagem1.png" alt="" />
+                <span class="lock-badge"><i class="fas fa-lock"></i></span>
+                <div class="media-engagement" aria-label="89.6K likes e 7.1K comentários">
+                  <span><i class="far fa-heart"></i> 89.6K</span>
+                  <span><i class="far fa-comment"></i> 7.1K</span>
+                </div>
+              </div>
+              <div class="feed-actions" aria-hidden="true">
+                <i class="far fa-heart"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+            </article>
+
+            <article class="feed-media">
+              <div class="feed-author">
+                <img src="/assets/profile/profile-photo.jpg" alt="" />
+                <div>
+                  <strong>Virginia Fonseca</strong>
+                  <span>@niic.ca</span>
+                </div>
+              </div>
+              <div class="locked-frame">
+                <img src="/assets/feed-third-reference.png" alt="" />
+                <span class="lock-badge"><i class="fas fa-lock"></i></span>
+                <div class="media-engagement" aria-label="55.3K likes e 8.4K comentários">
+                  <span><i class="far fa-heart"></i> 55.3K</span>
+                  <span><i class="far fa-comment"></i> 8.4K</span>
+                </div>
               </div>
               <div class="feed-actions" aria-hidden="true">
                 <i class="far fa-heart"></i>
@@ -242,51 +298,103 @@
               </details>
             </div>
           </section>
+
+          <button
+            class="footer-cta open-checkout"
+            type="button"
+            data-plan-id="15d"
+            data-plan-label="15 Dias"
+            data-plan-price="19.99"
+          >
+            <span>Veja tudo por apenas</span>
+            <strong>R$ 19,99</strong>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </button>
         </section>
       </main>
 
       <footer class="footer-legal-links">
-        <a href="#">Política de Privacidade</a>
-        <span>•</span>
         <a href="#">Termos de Uso</a>
+        <span>•</span>
+        <a href="#">Política de Privacidade</a>
       </footer>
     </div>
 
-    <div class="modal" id="checkout-modal" aria-hidden="true">
-      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="modal checkout-modal" id="checkout-modal" aria-hidden="true">
+      <div class="modal-card checkout-card" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
         <button class="modal-close" aria-label="Fechar">×</button>
-        <div class="modal-header">
-          <img src="/nicolle/images/sarah-profile.jpeg" alt="Sarah Estanislau" />
-          <div>
-            <span class="eyebrow">Checkout seguro via Pix</span>
-            <h2 id="checkout-title">Assinar Sarah Estanislau</h2>
-            <p><span id="selected-plan-label">15 Dias</span> por <strong id="selected-plan-price">R$ 19,99</strong></p>
-            <div class="email-delivery-note">
-              <i class="fas fa-envelope"></i>
-              <span>O conteúdo será entregue no e-mail informado abaixo.</span>
-            </div>
+        <div class="checkout-hero">
+          <img src="/assets/profile/cover-photo.png" alt="Virginia Fonseca" />
+          <div class="checkout-hero-overlay">
+            <span class="checkout-secure"><i class="fas fa-lock"></i> Checkout seguro</span>
+            <h2 id="checkout-title">Finalize seu acesso</h2>
+            <p>Virginia Fonseca</p>
           </div>
         </div>
 
-        <form id="checkout-form" class="checkout-form">
-          <input type="hidden" name="planId" id="selected-plan-id" value="15d" />
-          <label>
-            Nome completo
-            <input name="name" autocomplete="name" required placeholder="Seu nome" />
-          </label>
-          <label>
-            E-mail
-            <input name="email" type="email" autocomplete="email" required placeholder="seu@email.com" />
-          </label>
-          <input type="hidden" name="deliveryPreference" value="email" />
-          <button class="button full submit-payment" type="submit">Gerar Pix de R$ 19,99</button>
-          <p class="form-feedback" id="payment-feedback" role="status"></p>
-        </form>
+        <div class="checkout-body">
+          <div class="checkout-product">
+            <img src="/assets/profile/profile-photo.jpg" alt="" />
+            <div>
+              <span>Assinatura selecionada</span>
+              <strong id="selected-plan-label">15 Dias</strong>
+            </div>
+            <b id="selected-plan-price">R$ 19,99</b>
+          </div>
+
+          <section class="checkout-offer" aria-labelledby="checkout-offer-title">
+            <div class="checkout-offer-copy">
+              <span class="offer-badge">Oferta exclusiva</span>
+              <h3 id="checkout-offer-title">Adicionar pack completo por + R$ 19,90?</h3>
+              <p>Acesso estendido com conteudos extras liberados junto com a assinatura.</p>
+            </div>
+            <div class="checkout-offer-actions" role="group" aria-label="Adicionar oferta ao checkout">
+              <button class="offer-choice is-selected" type="button" data-offer-choice="no">Nao</button>
+              <button class="offer-choice" type="button" data-offer-choice="yes">Sim</button>
+            </div>
+          </section>
+
+          <div class="checkout-summary" aria-label="Resumo do pedido">
+            <div>
+              <span id="summary-plan-label">15 Dias</span>
+              <strong id="summary-plan-price">R$ 19,99</strong>
+            </div>
+            <div class="summary-offer-row" id="summary-offer-row" hidden>
+              <span>Oferta exclusiva</span>
+              <strong id="summary-offer-price">R$ 19,90</strong>
+            </div>
+            <div class="summary-total">
+              <span>Total</span>
+              <strong id="checkout-total-price">R$ 19,99</strong>
+            </div>
+          </div>
+
+          <div class="delivery-email-notice" role="note">
+            <span aria-hidden="true">&#9993;</span>
+            <strong>O conte&uacute;do ser&aacute; entregue no e-mail informado abaixo.</strong>
+          </div>
+
+          <form id="checkout-form" class="checkout-form">
+            <input type="hidden" name="planId" id="selected-plan-id" value="15d" />
+            <input type="hidden" name="offerAccepted" id="checkout-offer-accepted" value="false" />
+            <label>
+              Nome completo
+              <input name="name" autocomplete="name" required placeholder="Seu nome" />
+            </label>
+            <label>
+              E-mail
+              <input name="email" type="email" autocomplete="email" required placeholder="voce@email.com" />
+            </label>
+            <input type="hidden" name="deliveryPreference" value="email" />
+            <button class="button full submit-payment" type="submit">Gerar Pix de R$ 19,99</button>
+            <p class="form-feedback" id="payment-feedback" role="status"></p>
+          </form>
+        </div>
 
         <section class="pix-result" id="pix-result" aria-hidden="true" hidden>
           <div class="qr-box">
             <img id="pix-qr-image" alt="QR Code Pix" />
-            <span id="pix-qr-empty">QR Code indisponível. Use o código Pix copia e cola.</span>
+            <span id="pix-qr-empty">QR Code indisponível. Use o código copia e cola.</span>
           </div>
           <label>
             Código Pix copia e cola
@@ -303,12 +411,13 @@
 
     <div class="modal" id="upsell-modal" aria-hidden="true">
       <div class="modal-card upsell-card" role="dialog" aria-modal="true" aria-labelledby="upsell-title">
-        <button class="modal-close" aria-label="Fechar">×</button>
+        <button class="modal-close" aria-label="Fechar">X</button>
         <div class="upsell-header">
-          <span class="eyebrow">Oferta liberada após a compra</span>
-          <h2 id="upsell-title">Leve 6 meses por apenas + R$ 19,90</h2>
+          <span class="eyebrow">Oferta liberada apos a compra</span>
+          <h2 id="upsell-title">Leve 6 meses por + R$ 19,90</h2>
           <p>
-            Desfrute de uma experiência mais completa com 6 meses adicionais liberados por apenas + R$ 19,90.
+            Acabou de finalizar seu acesso inicial. Liberamos um upgrade exclusivo com 6 meses adicionais por
+            apenas mais R$ 19,90.
           </p>
         </div>
         <div class="upsell-benefit">
@@ -320,8 +429,7 @@
           <span>+ R$ 19,90</span>
         </div>
         <div class="upsell-actions">
-          <button class="button full upsell-accept" type="button">Quero Aproveitar!</button>
-          <button class="button ghost full upsell-decline" type="button">Fechar</button>
+          <button class="button full upsell-accept" type="button">Garantir Agora!</button>
         </div>
       </div>
     </div>

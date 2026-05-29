@@ -28,6 +28,25 @@ const SUBSCRIPTION_PLANS = {
   },
 };
 
+const ADDON_OFFERS = {
+  vip: {
+    label: "Vip Exclusivo",
+    price: 7.9,
+  },
+  whatsapp: {
+    label: "WhatsApp pessoal",
+    price: 26.9,
+  },
+  ruivinha: {
+    label: "Privacy MC MIERLA",
+    price: 11.9,
+  },
+  mel: {
+    label: "Privacy Mel Maia",
+    price: 9.9,
+  },
+};
+
 function sanitizePreference(value) {
   return value === "email" ? "email" : "email";
 }
@@ -62,6 +81,14 @@ function getSelectedPlan(planId) {
   return SUBSCRIPTION_PLANS[planId] || SUBSCRIPTION_PLANS["15d"];
 }
 
+function getSelectedAddons(addons = []) {
+  if (!Array.isArray(addons)) return [];
+
+  return addons
+    .map((addonId) => ADDON_OFFERS[addonId] && { id: addonId, ...ADDON_OFFERS[addonId] })
+    .filter(Boolean);
+}
+
 router.post("/checkout", async (req, res) => {
   try {
     const { customer, deliveryPreference, planId } = req.body;
@@ -87,9 +114,17 @@ router.post("/checkout", async (req, res) => {
       quantity: 1,
       planId: planId || "15d",
     };
+    const selectedAddons = getSelectedAddons(req.body.addons);
+    const addonItems = selectedAddons.map((addon) => ({
+      title: addon.label,
+      price: addon.price,
+      quantity: 1,
+      addonId: addon.id,
+    }));
+    const items = [item, ...addonItems];
 
     const payment = await paymentService.createPixPayment({
-      items: [item],
+      items,
       customer: normalizedCustomer,
       delivery: {},
       tracking,
@@ -98,7 +133,11 @@ router.post("/checkout", async (req, res) => {
     const order = orderStore.createOrder({
       customer: normalizedCustomer,
       deliveryPreference: sanitizePreference(deliveryPreference),
-      item,
+      item: {
+        ...item,
+        addons: selectedAddons,
+        total: items.reduce((sum, currentItem) => sum + Number(currentItem.price || 0), 0),
+      },
       transactionHash: payment.transaction_hash,
       pixCode: payment.pix_code,
       metaAttribution: {

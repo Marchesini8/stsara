@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Checkout Seguro - Privacy</title>
+    <meta name="description" content="Checkout seguro via Pix para finalizar seu acesso Privacy." />
+    <link rel="stylesheet" href="/virginia/css/all.min.css" />
+    <link rel="stylesheet" href="/checkout.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-xcod-sck
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+      window.__metaPixelIds = ["1002260965659482"].filter(
+        (pixelId, index, pixelIds) => pixelId && pixelIds.indexOf(pixelId) === index
+      );
+      window.__metaPixelIds.forEach((pixelId) => fbq("init", pixelId));
+      window.__metaPageViewEventId = `PageView.${Date.now()}.${Math.random().toString(16).slice(2)}`;
+      fbq("track", "PageView", {}, { eventID: window.__metaPageViewEventId });
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1002260965659482&ev=PageView&noscript=1"
+        alt=""
+      />
+    </noscript>
+  </head>
+  <body>
+    <header class="checkout-topbar">
+      <i class="fas fa-shield-alt" aria-hidden="true"></i>
+      <span>PAGAMENTO 100% SEGURO</span>
+    </header>
+
+    <main class="checkout-shell">
+      <section class="checkout-logo-panel" aria-label="Privacy">
+        <img src="/assets/privacy-logo-cropped.png" alt="Privacy" />
+      </section>
+
+      <section class="secure-banner" aria-label="Compra segura Privacy">
+        <img src="/assets/checkout/privacy-secure-banner.png" alt="Compra 100% segura Privacy" />
+      </section>
+
+      <div class="checkout-grid">
+        <div class="checkout-main">
+          <form id="checkout-page-form">
+            <section class="checkout-panel">
+              <div class="section-title">
+                <span>1</span>
+                <h1>Identifique-se</h1>
+                <div class="access-email-alert" role="note">
+                  <i class="fas fa-envelope" aria-hidden="true"></i>
+                  <strong>O acesso será entregue no e-mail informado abaixo.</strong>
+                </div>
+              </div>
+              <label>
+                Nome completo
+                <input name="name" autocomplete="name" required placeholder="Identifique-se com o seu nome" />
+              </label>
+              <label>
+                E-mail
+                <input name="email" type="email" autocomplete="email" required placeholder="seu@email.com" />
+              </label>
+            </section>
+
+            <section class="checkout-panel payment-panel">
+              <div class="section-title">
+                <span>2</span>
+                <div>
+                  <h2>Pagamento</h2>
+                  <p>Escolha o seu método de pagamento preferido</p>
+                </div>
+              </div>
+
+              <div class="pix-method" aria-label="Pagamento via Pix selecionado">
+                <div class="pix-method-head">
+                  <span class="radio-dot"></span>
+                  <img class="pix-symbol" src="/assets/checkout/pix-symbol.png" alt="" />
+                  <strong>Pix</strong>
+                  <em>Aprovação imediata</em>
+                </div>
+                <div class="pix-copy">
+                  <p>- Liberação imediata!</p>
+                  <p>- É simples, basta usar o aplicativo do seu banco para pagar com Pix.</p>
+                  <p>- Super seguro. O pagamento Pix foi desenvolvido pelo Banco Central para facilitar pagamentos.</p>
+                </div>
+              </div>
+
+              <div class="product-box">
+                <p>Você está adquirindo:</p>
+                <div class="product-row">
+                  <img src="/assets/profile/profile-photo.jpg" alt="" />
+                  <div>
+                    <strong id="checkout-plan-label">Privacy Virginia Fonseca</strong>
+                    <small class="product-period" id="checkout-plan-period">15 Dias</small>
+                    <span id="checkout-plan-price"><del>R$ 49,90</del> Por R$ 19,90</span>
+                  </div>
+                </div>
+              </div>
+
+              <section class="bump-box" aria-labelledby="bump-title">
+                <h3 id="bump-title">Você tem 4 ofertas adicionais</h3>
+
+                <label class="bump-item">
+                  <input type="checkbox" name="addons" value="vip" data-price="7.90" />
+                  <img src="/assets/checkout/vip-exclusivo.png" alt="" />
+                  <span class="bump-content">
+                    <strong>Vip Exclusivo</strong>
+                    <small>Apenas assinantes e minhas amigas</small>
+                    <b>R$ 7,90</b>
+                    <em><i class="fas fa-arrow-right"></i> Sim, eu aceito essa oferta</em>
+                  </span>
+                </label>
+
+                <label class="bump-item">
+                  <input type="checkbox" name="addons" value="whatsapp" data-price="26.90" />
+                  <img src="/assets/checkout/whatsapp.png" alt="" />
+                  <span class="bump-content">
+                    <strong>WhatsApp pessoal</strong>
+                    <small>Tenha acesso ao meu WhatsApp pessoal e muito mais!</small>
+                    <b>R$ 26,90</b>
+                    <em><i class="fas fa-arrow-right"></i> Sim, eu aceito essa oferta</em>
+                  </span>
+                </label>
+
+                <label class="bump-item">
+                  <input type="checkbox" name="addons" value="ruivinha" data-price="11.90" />
+                  <img src="/assets/checkout/privacy-mc-mierla.jpg" alt="" />
+                  <span class="bump-content">
+                    <strong>Privacy MC MIERLA</strong>
+                    <b>R$ 11,90</b>
+                    <em><i class="fas fa-arrow-right"></i> Sim, eu aceito essa oferta</em>
+                  </span>
+                </label>
+
+                <label class="bump-item">
+                  <input type="checkbox" name="addons" value="mel" data-price="9.90" />
+                  <img src="/assets/checkout/mel-maia.png" alt="" />
+                  <span class="bump-content">
+                    <strong>Privacy Mel Maia</strong>
+                    <b>R$ 9,90</b>
+                    <em><i class="fas fa-arrow-right"></i> Sim, eu aceito essa oferta</em>
+                  </span>
+                </label>
+              </section>
+
+              <div class="checkout-total">
+                <strong>Total:</strong>
+                <b id="checkout-total">R$ 19,99</b>
+              </div>
+            </section>
+
+            <div class="safe-checkout-strip pre-pix-safe-strip" aria-label="Site seguro, SSL certificado e compra segura">
+              <img src="/assets/seguro_e_confiavel.png" alt="Site seguro, SSL certificado e compra 100% segura" />
+            </div>
+            <button class="generate-pix" type="submit">GERAR PIX</button>
+            <p class="checkout-feedback" id="checkout-feedback" role="status"></p>
+          </form>
+
+          <section class="pix-result-page" id="pix-result-page" hidden>
+            <div class="qr-box-page">
+              <img id="checkout-pix-qr" alt="QR Code Pix" />
+              <span id="checkout-pix-empty">QR Code indisponível. Use o código Pix copia e cola.</span>
+            </div>
+            <label>
+              Código Pix copia e cola
+              <textarea id="checkout-pix-code" readonly inputmode="none" tabindex="-1" rows="4"></textarea>
+            </label>
+            <div class="pix-page-actions">
+              <button class="copy-pix-page" type="button">Copiar código Pix</button>
+            </div>
+            <div class="safe-checkout-strip" aria-label="Site seguro, SSL certificado e compra segura">
+              <img src="/assets/seguro_e_confiavel.png" alt="Site seguro, SSL certificado e compra 100% segura" />
+            </div>
+            <div class="checkout-delivery-status" id="checkout-delivery-status" role="status"></div>
+          </section>
+        </div>
+
+        <aside class="trust-sidebar" aria-label="Garantias">
+          <article>
+            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+            <div>
+              <strong>Dados protegidos</strong>
+              <p>Os seus dados são confidenciais e seguros</p>
+            </div>
+          </article>
+          <article>
+            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+            <div>
+              <strong>Pagamento 100% Seguro</strong>
+              <p>As informações desta compra são criptografadas</p>
+            </div>
+          </article>
+          <article>
+            <i class="fas fa-check" aria-hidden="true"></i>
+            <div>
+              <strong>Conteúdo aprovado</strong>
+              <p>100% revisado e aprovado por profissionais</p>
+            </div>
+          </article>
+          <article>
+            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+            <div>
+              <strong>Garantia de 7 dias</strong>
+              <p>Você está protegido por uma garantia de satisfação</p>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </main>
+
+    <script src="/checkout.js"></script>
+  </body>
+</html>

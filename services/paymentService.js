@@ -36,8 +36,22 @@ function extractTransactionHash(data) {
   return (
     data.transaction_hash ||
     data.transactionHash ||
+    data.transaction_id ||
+    data.transactionId ||
+    data.hash ||
+    data.id ||
+    data.transaction?.transaction_hash ||
+    data.transaction?.transactionHash ||
+    data.transaction?.hash ||
+    data.transaction?.id ||
+    data.payment?.transaction_hash ||
+    data.payment?.transactionHash ||
+    data.payment?.hash ||
+    data.payment?.id ||
     data.pix?.transaction_hash ||
     data.pix?.transactionHash ||
+    data.pix?.hash ||
+    data.pix?.id ||
     null
   );
 }
@@ -174,15 +188,19 @@ exports.createPixPayment = async ({ items, customer, delivery, tracking = {} }) 
       throw error;
     }
 
-    if (transactionHash) {
-      paymentStatusStore.savePayment(transactionHash, {
-        status: response.data.status || "pending",
-        amount: response.data.amount || totalInCents,
-        paymentMethod: "pix",
-        isPaid: response.data.status === "paid",
-        pixCode,
-      });
+    if (!transactionHash) {
+      const error = new Error(`IronPay respondeu sem identificador de transacao: ${JSON.stringify(response.data)}`);
+      error.statusCode = 502;
+      throw error;
     }
+
+    paymentStatusStore.savePayment(transactionHash, {
+      status: response.data.status || "pending",
+      amount: response.data.amount || totalInCents,
+      paymentMethod: "pix",
+      isPaid: response.data.status === "paid",
+      pixCode,
+    });
 
     return {
       transaction_hash: transactionHash,

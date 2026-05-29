@@ -13,12 +13,25 @@ const app = express();
 const port = process.env.PORT || 3000;
 const host = "0.0.0.0";
 
+app.disable("etag");
 app.use(cors());
 app.use(express.json({ limit: "2mb" }));
-app.use("/assets", express.static(path.join(__dirname, "assets"), { index: false }));
+
+app.use((req, res, next) => {
+  res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.set("Pragma", "no-cache");
+  res.set("Expires", "0");
+  next();
+});
+
+app.use("/assets", express.static(path.join(__dirname, "assets"), { index: false, etag: false }));
 app.use(
   "/nicolle",
-  express.static(path.join(__dirname, "nicole-influencer.site", "nicolle"), { index: false })
+  express.static(path.join(__dirname, "nicole-influencer.site", "nicolle"), { index: false, etag: false })
+);
+app.use(
+  "/virginia",
+  express.static(path.join(__dirname, "nicole-influencer.site", "nicolle"), { index: false, etag: false })
 );
 
 app.get("/styles.css", (req, res) => {
@@ -27,6 +40,14 @@ app.get("/styles.css", (req, res) => {
 
 app.get("/script.js", (req, res) => {
   res.sendFile(path.join(__dirname, "script.js"));
+});
+
+app.get("/checkout.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "checkout.css"));
+});
+
+app.get("/checkout.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "checkout.js"));
 });
 
 app.use("/api/payments", paymentRoutes);
@@ -46,6 +67,11 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get("/checkout.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "checkout.html"));
+});
+
 app.listen(port, host, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servindo arquivos de: ${__dirname}`);
 });
