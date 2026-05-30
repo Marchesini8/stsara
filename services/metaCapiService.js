@@ -2,6 +2,7 @@ const crypto = require("crypto");
 
 const META_GRAPH_VERSION = process.env.META_GRAPH_VERSION || "v20.0";
 const META_CAPI_URL = `https://graph.facebook.com/${META_GRAPH_VERSION}`;
+const DEFAULT_META_PIXEL_IDS = ["1002260965659482", "1499267518361019"];
 const SUPPORTED_EVENTS = new Set([
   "PageView",
   "ViewContent",
@@ -56,6 +57,16 @@ function compactObject(value = {}) {
   );
 }
 
+function getConfiguredPixelIds() {
+  const configuredIds = [process.env.META_PIXEL_IDS, process.env.META_PIXEL_ID]
+    .filter(Boolean)
+    .flatMap((value) => String(value).split(","))
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  return Array.from(new Set([...configuredIds, ...DEFAULT_META_PIXEL_IDS]));
+}
+
 function buildUserData(req, payload = {}) {
   const userData = payload.user_data || {};
   return compactObject({
@@ -101,62 +112,72 @@ function buildEvent(req, payload = {}) {
 }
 
 async function sendEvent(req, payload) {
-  const pixelId = process.env.META_PIXEL_ID;
+  const pixelIds = getConfiguredPixelIds();
   const accessToken = process.env.META_ACCESS_TOKEN;
 
-  if (!pixelId || !accessToken) {
+  if (!pixelIds.length || !accessToken) {
     const error = new Error("META_PIXEL_ID e META_ACCESS_TOKEN precisam estar configurados no .env.");
     error.statusCode = 500;
     throw error;
   }
 
   const event = buildEvent(req, payload);
-  const url = `${META_CAPI_URL}/${pixelId}/events?access_token=${encodeURIComponent(accessToken)}`;
 
-  console.info("[Meta CAPI] Enviando evento", {
-    event_name: event.event_name,
-    event_id: event.event_id,
-    has_fbp: Boolean(event.user_data.fbp),
-    has_fbc: Boolean(event.user_data.fbc),
-    has_external_id: Boolean(event.user_data.external_id),
-    has_email: Boolean(event.user_data.em),
-    has_phone: Boolean(event.user_data.ph),
-    has_client_ip_address: Boolean(event.user_data.client_ip_address),
-    has_client_user_agent: Boolean(event.user_data.client_user_agent),
-    value: event.custom_data.value,
-    currency: event.custom_data.currency,
-  });
+  const results = [];
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ data: [event] }),
-  });
+  for (const pixelId of pixelIds) {
+    const url = `${META_CAPI_URL}/${pixelId}/events?access_token=${encodeURIComponent(accessToken)}`;
 
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    console.error("[Meta CAPI] Erro ao enviar evento", {
+    console.info("[Meta CAPI] Enviando evento", {
+      pixel_id: pixelId,
       event_name: event.event_name,
       event_id: event.event_id,
-      status: response.status,
-      response: data,
+      has_fbp: Boolean(event.user_data.fbp),
+      has_fbc: Boolean(event.user_data.fbc),
+      has_external_id: Boolean(event.user_data.external_id),
+      has_email: Boolean(event.user_data.em),
+      has_phone: Boolean(event.user_data.ph),
+      has_client_ip_address: Boolean(event.user_data.client_ip_address),
+      has_client_user_agent: Boolean(event.user_data.client_user_agent),
+      value: event.custom_data.value,
+      currency: event.custom_data.currency,
     });
-    const error = new Error(data.error?.message || "Erro ao enviar evento para Meta CAPI.");
-    error.statusCode = response.status;
-    throw error;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data: [event] }),
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      console.error("[Meta CAPI] Erro ao enviar evento", {
+        pixel_id: pixelId,
+        event_name: event.event_name,
+        event_id: event.event_id,
+        status: response.status,
+        response: data,
+      });
+      const error = new Error(data.error?.message || "Erro ao enviar evento para Meta CAPI.");
+      error.statusCode = response.status;
+      throw error;
+    }
+
+    console.info("[Meta CAPI] Evento enviado", {
+      pixel_id: pixelId,
+      event_name: event.event_name,
+      event_id: event.event_id,
+      fbtrace_id: data.fbtrace_id,
+      events_received: data.events_received,
+    });
+
+    results.push({ pixel_id: pixelId, ...data });
   }
 
-  console.info("[Meta CAPI] Evento enviado", {
-    event_name: event.event_name,
-    event_id: event.event_id,
-    fbtrace_id: data.fbtrace_id,
-    events_received: data.events_received,
-  });
-
-  return data;
+  return results;
 }
 
 async function sendPurchaseFromOrder(req, order) {
