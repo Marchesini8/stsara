@@ -18,7 +18,7 @@ const plans = {
   "15d": {
     label: "Privacy Sarah Estanislau",
     period: "15 Dias",
-    price: 19.99,
+    price: 9.9,
   },
   "30d": {
     label: "30 Dias",
@@ -219,7 +219,7 @@ function updateTotal() {
   if (checkoutPlanPeriod) checkoutPlanPeriod.textContent = selectedPlan.period;
   if (checkoutPlanPrice) {
     if (selectedPlanId === "15d") {
-      checkoutPlanPrice.innerHTML = "<del>R$ 49,90</del> Por R$ 19,90";
+      checkoutPlanPrice.innerHTML = "<del>R$ 25,90</del> Por R$ 9,90";
     } else {
       checkoutPlanPrice.textContent = formatCurrency(selectedPlan.price);
     }
