@@ -67,6 +67,21 @@ function getConfiguredPixelIds() {
   return Array.from(new Set([...configuredIds, ...DEFAULT_META_PIXEL_IDS]));
 }
 
+function getConfiguredAccessTokens(pixelIds = []) {
+  const tokenList = String(process.env.META_ACCESS_TOKENS || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const fallbackToken = String(process.env.META_ACCESS_TOKEN || "").trim();
+
+  return Object.fromEntries(
+    pixelIds.map((pixelId, index) => [
+      pixelId,
+      String(process.env[`META_ACCESS_TOKEN_${pixelId}`] || "").trim() || tokenList[index] || fallbackToken,
+    ])
+  );
+}
+
 function buildUserData(req, payload = {}) {
   const userData = payload.user_data || {};
   return compactObject({
@@ -113,9 +128,9 @@ function buildEvent(req, payload = {}) {
 
 async function sendEvent(req, payload) {
   const pixelIds = getConfiguredPixelIds();
-  const accessToken = process.env.META_ACCESS_TOKEN;
+  const accessTokens = getConfiguredAccessTokens(pixelIds);
 
-  if (!pixelIds.length || !accessToken) {
+  if (!pixelIds.length || pixelIds.some((pixelId) => !accessTokens[pixelId])) {
     const error = new Error("META_PIXEL_ID e META_ACCESS_TOKEN precisam estar configurados no .env.");
     error.statusCode = 500;
     throw error;
@@ -126,6 +141,7 @@ async function sendEvent(req, payload) {
   const results = [];
 
   for (const pixelId of pixelIds) {
+    const accessToken = accessTokens[pixelId];
     const url = `${META_CAPI_URL}/${pixelId}/events?access_token=${encodeURIComponent(accessToken)}`;
 
     console.info("[Meta CAPI] Enviando evento", {
