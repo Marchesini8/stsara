@@ -216,7 +216,11 @@ function markPurchaseTracked(orderId) {
 
 function updateTotal() {
   if (checkoutPlanLabel) checkoutPlanLabel.textContent = selectedPlan.label;
-  if (checkoutPlanPeriod) checkoutPlanPeriod.textContent = selectedPlan.period;
+  if (checkoutPlanPeriod) {
+    const shouldHidePeriod = selectedPlan.label === selectedPlan.period;
+    checkoutPlanPeriod.textContent = shouldHidePeriod ? "" : selectedPlan.period;
+    checkoutPlanPeriod.hidden = shouldHidePeriod;
+  }
   if (checkoutPlanPrice) {
     if (selectedPlanId === "15d") {
       checkoutPlanPrice.innerHTML = "<del>R$ 25,90</del> Por R$ 9,90";

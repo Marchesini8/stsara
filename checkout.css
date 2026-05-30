@@ -370,7 +370,6 @@ textarea:focus {
   width: max-content;
   margin-top: 5px;
   padding-bottom: 2px;
-  border-bottom: 3px solid var(--green);
   color: #3a4352;
   font-size: 0.78rem;
   font-weight: 900;
