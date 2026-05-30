@@ -188,33 +188,6 @@ img {
   line-height: 1.25;
 }
 
-.access-email-alert {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-  min-height: 42px;
-  max-width: 236px;
-  padding: 8px 10px;
-  border: 1px solid rgba(255, 90, 31, 0.24);
-  border-radius: 8px;
-  background: #fff3ec;
-  color: #d94a14;
-  font-size: 0.72rem;
-  line-height: 1.18;
-  box-shadow: 0 8px 18px rgba(255, 90, 31, 0.08);
-}
-
-.access-email-alert i {
-  flex: 0 0 auto;
-  color: var(--orange);
-  font-size: 0.9rem;
-}
-
-.access-email-alert strong {
-  font-weight: 900;
-}
-
 label {
   display: grid;
   gap: 8px;
@@ -688,11 +661,6 @@ textarea:focus {
     flex-wrap: wrap;
   }
 
-  .access-email-alert {
-    flex-basis: calc(100% - 32px);
-    max-width: none;
-    margin-left: 32px;
-  }
 }
 
 @media (max-width: 380px) {
