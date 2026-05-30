@@ -16,7 +16,7 @@ const checkoutDeliveryStatus = document.querySelector("#checkout-delivery-status
 
 const plans = {
   "15d": {
-    label: "Privacy Virginia Fonseca",
+    label: "Privacy Sarah Estanislau",
     period: "15 Dias",
     price: 19.99,
   },
@@ -76,19 +76,19 @@ function getTotal() {
 function getPixelProductParams() {
   const contents = [
     {
-      id: `site-18-Virginia-premium-${selectedPlanId}`,
+      id: `site-18-Sarah-premium-${selectedPlanId}`,
       quantity: 1,
       item_price: selectedPlan.price,
     },
     ...getSelectedAddons().map((addon) => ({
-      id: `site-18-Virginia-${addon.id}`,
+      id: `site-18-Sarah-${addon.id}`,
       quantity: 1,
       item_price: addon.price,
     })),
   ];
 
   return {
-    content_name: `Acesso Premium Virginia - ${selectedPlan.period}`,
+    content_name: `Acesso Premium Sarah - ${selectedPlan.period}`,
     content_type: "product",
     content_ids: contents.map((item) => item.id),
     contents,

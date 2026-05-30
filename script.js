@@ -317,7 +317,7 @@ function getPixelProductParams(plan = selectedPlan) {
   const total = getCheckoutTotal(plan);
   const contents = [
     {
-      id: `site-18-Virginia-premium-${plan.id}`,
+      id: `site-18-Sarah-premium-${plan.id}`,
       quantity: 1,
       item_price: plan.price,
     },
@@ -325,17 +325,17 @@ function getPixelProductParams(plan = selectedPlan) {
 
   if (checkoutOfferAccepted) {
     contents.push({
-      id: `site-18-Virginia-${checkoutOffer.id}`,
+      id: `site-18-Sarah-${checkoutOffer.id}`,
       quantity: 1,
       item_price: checkoutOffer.price,
     });
   }
 
   return {
-    content_name: `Acesso Premium Virginia - ${plan.label}${checkoutOfferAccepted ? " + Oferta exclusiva" : ""}`,
+    content_name: `Acesso Premium Sarah - ${plan.label}${checkoutOfferAccepted ? " + Oferta exclusiva" : ""}`,
     content_type: "product",
     contents,
-    content_ids: [`site-18-Virginia-premium-${plan.id}`],
+    content_ids: [`site-18-Sarah-premium-${plan.id}`],
     currency: "BRL",
     value: total,
   };
