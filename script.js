@@ -72,6 +72,8 @@ const checkoutOffer = {
 const activeOrderStorageKey = "active_order";
 const externalIdCookieName = "site_external_id";
 const trackingStorageKey = "checkout_tracking";
+const trackingCookieName = "sarah_tracking";
+const trackingKeys = ["src", "utm_source", "utm_medium", "utm_campaign", "utm_adset", "utm_content", "utm_term", "fbclid"];
 const upsellStoragePrefix = "upsell_seen_";
 const purchaseToastNames = [
   "Arthur",
@@ -315,6 +317,7 @@ function updatePromoValidity() {
 
 function getPixelProductParams(plan = selectedPlan) {
   const total = getCheckoutTotal(plan);
+  const tracking = getTrackingData();
   const contents = [
     {
       id: `site-18-Sarah-premium-${plan.id}`,
@@ -338,6 +341,7 @@ function getPixelProductParams(plan = selectedPlan) {
     content_ids: [`site-18-Sarah-premium-${plan.id}`],
     currency: "BRL",
     value: total,
+    ...tracking,
   };
 }
 
@@ -413,24 +417,80 @@ function getMetaAttributionData() {
 
 function getTrackingData() {
   const params = new URLSearchParams(window.location.search);
-  const keys = ["src", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-  const tracking = {};
+  const urlTracking = {};
 
-  keys.forEach((key) => {
-    tracking[key] = params.get(key) || "";
+  trackingKeys.forEach((key) => {
+    urlTracking[key] = params.get(key) || "";
   });
 
+  const hasUrlTracking = trackingKeys.some((key) => Boolean(urlTracking[key]));
+  const savedTracking = getSavedTrackingData();
+  if (hasSavedTracking(savedTracking)) {
+    saveTrackingData(savedTracking);
+    return savedTracking;
+  }
+
+  const tracking = normalizeTrackingData({
+    ...urlTracking,
+    landing_page: hasUrlTracking ? window.location.href : "",
+    referrer: hasUrlTracking ? document.referrer || "" : "",
+    captured_at: hasUrlTracking ? new Date().toISOString() : "",
+  });
+
+  if (hasUrlTracking) saveTrackingData(tracking);
+  return tracking;
+}
+
+function safeParseJson(value) {
   try {
-    const saved = JSON.parse(window.localStorage.getItem(trackingStorageKey) || "{}");
-    keys.forEach((key) => {
-      tracking[key] = tracking[key] || saved[key] || "";
-    });
+    return JSON.parse(value || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function normalizeTrackingData(value = {}) {
+  return {
+    src: value.src || "",
+    utm_source: value.utm_source || "",
+    utm_medium: value.utm_medium || "",
+    utm_campaign: value.utm_campaign || "",
+    utm_adset: value.utm_adset || "",
+    utm_content: value.utm_content || "",
+    utm_term: value.utm_term || "",
+    fbclid: value.fbclid || "",
+    landing_page: value.landing_page || "",
+    referrer: value.referrer || "",
+    captured_at: value.captured_at || "",
+  };
+}
+
+function hasSavedTracking(value = {}) {
+  return trackingKeys.some((key) => Boolean(value[key]));
+}
+
+function getSavedTrackingData() {
+  let saved = {};
+  try {
+    saved = safeParseJson(window.localStorage.getItem(trackingStorageKey));
+  } catch {
+    saved = {};
+  }
+
+  if (!hasSavedTracking(saved)) {
+    saved = safeParseJson(getCookie(trackingCookieName));
+  }
+
+  return normalizeTrackingData(saved);
+}
+
+function saveTrackingData(tracking) {
+  try {
     window.localStorage.setItem(trackingStorageKey, JSON.stringify(tracking));
   } catch {
     // Tracking is helpful for attribution, but checkout must keep working without localStorage.
   }
-
-  return tracking;
+  setCookie(trackingCookieName, JSON.stringify(tracking), 180);
 }
 
 function createEventId(eventName) {
@@ -975,7 +1035,7 @@ promoToggle?.addEventListener("click", () => {
   planList?.classList.toggle("is-collapsed", isExpanded);
 });
 
-trackMetaEvent("PageView", {}, { eventId: window.__metaPageViewEventId, skipBrowser: true });
+trackMetaEvent("PageView", getTrackingData(), { eventId: window.__metaPageViewEventId, skipBrowser: true });
 trackMetaEvent("ViewContent", getPixelProductParams());
 updatePromoValidity();
 updateCheckoutTotals();

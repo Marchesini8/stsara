@@ -13,7 +13,7 @@ const SUPPORTED_EVENTS = new Set([
 ]);
 
 function getPublicBaseUrl() {
-  return (process.env.PUBLIC_BASE_URL || "http://localhost:3001").replace(/\/$/, "");
+  return (process.env.PUBLIC_BASE_URL || "https://sarah.nicole-vip.site").replace(/\/$/, "");
 }
 
 function normalizeString(value = "") {
@@ -203,6 +203,7 @@ async function sendPurchaseFromOrder(req, order) {
   const eventId = `Purchase.${order.id}`;
   const productName = order.item?.title || process.env.PRODUCT_NAME || "Acesso Premium Sarah Estanislau";
   const productId = process.env.PRODUCT_ID || "site-18-sarah-estanislau-premium";
+  const tracking = order.trackingAttribution || {};
 
   return sendEvent(req, {
     event_name: "Purchase",
@@ -230,6 +231,15 @@ async function sendPurchaseFromOrder(req, order) {
       ],
       currency: "BRL",
       value,
+      src: tracking.src,
+      utm_source: tracking.utm_source,
+      utm_medium: tracking.utm_medium,
+      utm_campaign: tracking.utm_campaign,
+      utm_adset: tracking.utm_adset,
+      utm_content: tracking.utm_content,
+      utm_term: tracking.utm_term,
+      fbclid: tracking.fbclid,
+      landing_page: tracking.landing_page,
     },
   });
 }

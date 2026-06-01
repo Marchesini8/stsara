@@ -72,8 +72,13 @@ function sanitizeTracking(value = {}) {
     utm_source: value.utm_source || "",
     utm_medium: value.utm_medium || "",
     utm_campaign: value.utm_campaign || "",
+    utm_adset: value.utm_adset || "",
     utm_term: value.utm_term || "",
     utm_content: value.utm_content || "",
+    fbclid: value.fbclid || "",
+    landing_page: value.landing_page || "",
+    referrer: value.referrer || "",
+    captured_at: value.captured_at || "",
   };
 }
 
@@ -140,6 +145,7 @@ router.post("/checkout", async (req, res) => {
       },
       transactionHash: payment.transaction_hash,
       pixCode: payment.pix_code,
+      trackingAttribution: tracking,
       metaAttribution: {
         ...attribution,
         external_id: attribution.external_id || metaCapiService.createExternalId(normalizedCustomer),
