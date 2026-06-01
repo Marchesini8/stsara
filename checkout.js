@@ -16,7 +16,7 @@ const checkoutDeliveryStatus = document.querySelector("#checkout-delivery-status
 
 const plans = {
   "15d": {
-    label: "Privacy Sarah Estanislau",
+    label: "Privacy MC Mirela",
     period: "15 Dias",
     price: 19.9,
   },
@@ -80,19 +80,19 @@ function getPixelProductParams() {
   const tracking = getTrackingData();
   const contents = [
     {
-      id: `site-18-Sarah-premium-${selectedPlanId}`,
+      id: `site-18-MC-Mirela-premium-${selectedPlanId}`,
       quantity: 1,
       item_price: selectedPlan.price,
     },
     ...getSelectedAddons().map((addon) => ({
-      id: `site-18-Sarah-${addon.id}`,
+      id: `site-18-MC-Mirela-${addon.id}`,
       quantity: 1,
       item_price: addon.price,
     })),
   ];
 
   return {
-    content_name: `Acesso Premium Sarah - ${selectedPlan.period}`,
+    content_name: `Acesso Premium MC Mirela - ${selectedPlan.period}`,
     content_type: "product",
     content_ids: contents.map((item) => item.id),
     contents,

@@ -201,8 +201,8 @@ async function sendPurchaseFromOrder(req, order) {
 
   const value = Number(order.item?.price || process.env.PRODUCT_PRICE || 0);
   const eventId = `Purchase.${order.id}`;
-  const productName = order.item?.title || process.env.PRODUCT_NAME || "Acesso Premium Sarah Estanislau";
-  const productId = process.env.PRODUCT_ID || "site-18-sarah-estanislau-premium";
+  const productName = order.item?.title || process.env.PRODUCT_NAME || "Acesso Premium MC Mirela";
+  const productId = process.env.PRODUCT_ID || "site-18-mc-mirela-premium";
   const tracking = order.trackingAttribution || {};
 
   return sendEvent(req, {

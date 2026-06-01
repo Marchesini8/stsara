@@ -320,7 +320,7 @@ function getPixelProductParams(plan = selectedPlan) {
   const tracking = getTrackingData();
   const contents = [
     {
-      id: `site-18-Sarah-premium-${plan.id}`,
+      id: `site-18-MC-Mirela-premium-${plan.id}`,
       quantity: 1,
       item_price: plan.price,
     },
@@ -328,17 +328,17 @@ function getPixelProductParams(plan = selectedPlan) {
 
   if (checkoutOfferAccepted) {
     contents.push({
-      id: `site-18-Sarah-${checkoutOffer.id}`,
+      id: `site-18-MC-Mirela-${checkoutOffer.id}`,
       quantity: 1,
       item_price: checkoutOffer.price,
     });
   }
 
   return {
-    content_name: `Acesso Premium Sarah - ${plan.label}${checkoutOfferAccepted ? " + Oferta exclusiva" : ""}`,
+    content_name: `Acesso Premium MC Mirela - ${plan.label}${checkoutOfferAccepted ? " + Oferta exclusiva" : ""}`,
     content_type: "product",
     contents,
-    content_ids: [`site-18-Sarah-premium-${plan.id}`],
+    content_ids: [`site-18-MC-Mirela-premium-${plan.id}`],
     currency: "BRL",
     value: total,
     ...tracking,
