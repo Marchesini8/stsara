@@ -13,7 +13,7 @@ const SUPPORTED_EVENTS = new Set([
 ]);
 
 function getPublicBaseUrl() {
-  return (process.env.PUBLIC_BASE_URL || "https://sarah.nicole-vip.site").replace(/\/$/, "");
+  return (process.env.PUBLIC_BASE_URL || "https://sarah-vip.site").replace(/\/$/, "");
 }
 
 function normalizeString(value = "") {
